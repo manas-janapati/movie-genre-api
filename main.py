@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from transformers import DistilBertTokenizer, DistilBertForSequenceClassification
 import torch
@@ -7,6 +8,15 @@ from sklearn.preprocessing import MultiLabelBinarizer
 import pickle
 
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://movie-genre-prediction-manas-janapati.netlify.app", "*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Load model and tokenizer
 model = DistilBertForSequenceClassification.from_pretrained("./movie_genre_model")
