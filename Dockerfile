@@ -2,7 +2,7 @@ FROM python:3.9-slim
 WORKDIR /app
 COPY . /app
 RUN apt-get update && apt-get install -y wget unzip && rm -rf /var/lib/apt/lists/*
-RUN wget -O movie_genre_model.zip "https://drive.google.com/file/d/1qO_FAS4g4AFlMuEJiRtivlV7K6PgmoYM/view?usp=sharing" && unzip movie_genre_model.zip && rm movie_genre_model.zip
+RUN wget -O movie_genre_model.zip "https://drive.google.com/uc?export=download&id=1qO_FAS4g4AFlMuEJiRtivlV7K6PgmoYM" && unzip movie_genre_model.zip && rm movie_genre_model.zip
 RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
